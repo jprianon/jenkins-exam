@@ -12,11 +12,11 @@ pipeline {
             }
         }
         
-        stage('Construction de l\'application') {
-            steps {
-                sh 'pip install -r requirements.txt' // Remplacez cette commande par celle correspondant à votre processus de construction
-            }
-        }
+        //stage('Construction de l\'application') {
+        //    steps {
+        //        sh 'pip install -r requirements.txt' // Remplacez cette commande par celle correspondant à votre processus de construction
+        //    }
+        //}
         
         //stage('Tests de l\'application') {
         //    steps {
