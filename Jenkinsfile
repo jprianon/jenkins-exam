@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clonage du dépôt') {
             steps {
-                git branch: 'master', url: 'https://github.com/votre-utilisateur/votre-projet.git'
+                git branch: 'master', url: 'https://github.com/jprianon/jenkins-exam.git'
             }
         }
         
