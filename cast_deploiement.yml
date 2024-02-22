@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cast-service-deployment
+  labels:
+    app: cast-service
+spec:
+  replicas: 1  # Nombre de répliques souhaitées
+  selector:
+    matchLabels:
+      app: cast-service
+  template:
+    metadata:
+      labels:
+        app: cast-service
+    spec:
+      containers:
+      - name: cast-service
+        image: votre-utilisateur/cast-service:latest  # Remplacez par l'image Docker construite pour votre service cast_service
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URI
+          value: "postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev"
