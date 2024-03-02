@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Récupérer le code depuis le dépôt GitHub
-                git credentialsId: 'key-31012024', url: 'https://github.com/jprianon/examenjenkins-exam.git'
+                git credentialsId: 'amazon-jp_bk', url: 'https://github.com/jprianon/examenjenkins-exam.git'
             }
         }
         
