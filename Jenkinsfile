@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_CREDENTIALS = credentials('amazon_jp_bk')
+        DOCKER_CREDENTIALS = credentials('master')
         KUBECONFIG = credentials('kubeconfig-id')
         CHART_VERSION = '1.0.0'
     }
@@ -11,7 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Récupérer le code depuis le dépôt GitHub
-                git credentialsId: 'amazon_jp_bk', url: 'https://github.com/jprianon/examenjenkins-exam.git'
+                git credentialsId: 'master', url: 'https://github.com/jprianon/examenjenkins-exam.git'
             }
         }
         
