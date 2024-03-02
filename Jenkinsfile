@@ -1,59 +1,58 @@
 pipeline {
     agent any
     
-    parameters {
-        choice(name: 'ENVIRONNEMENT', choices: ['dev', 'QA', 'staging', 'prod'], description: 'Sélectionnez l\'environnement cible.')
+    environment {
+        DOCKER_CREDENTIALS = credentials('jprianon')
+        KUBECONFIG = credentials('kubeconfig-id')
+        CHART_VERSION = '1.0.0'
     }
-    
+
     stages {
-        stage('Clonage du dépôt') {
+        stage('Checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/votre-utilisateur/votre-projet.git'
+                // Récupérer le code depuis le dépôt GitHub
+                git credentialsId: 'key-31012024', url: 'https://github.com/jprianon/examenjenkins-exam.git'
             }
         }
         
-        stage('Construction de l\'application') {
+        stage('Build and Push Docker Image') {
             steps {
-                sh 'pip install -r requirements.txt' // Remplacez cette commande par celle correspondant à votre processus de construction
-            }
-        }
-        
-        //stage('Tests de l\'application') {
-        //    steps {
-        //        sh 'mvn test' // Remplacez cette commande par celle correspondant à vos tests
-        //    }
-        //}
-        
-        stage('Construction de l\'image Docker') {
-            when {
-                expression { params.ENVIRONNEMENT == 'prod' }
-            }
-            steps {
+                // Construire et pousser l'image Docker vers DockerHub
                 script {
-                    docker.build('jprianon/jenkins-exam') // Remplacez cette commande par la construction de votre image Docker
-                    docker.withRegistry('https://registry.hub.docker.com', 'credentials-id') {
-                        docker.image('jprianon/jenkins-exam').push('latest')
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
+                        docker.build("jprianon/jenkins-exam:${env.CHART_VERSION}")
+                        docker.image("jprianon/jenkins-exam:${env.CHART_VERSION}").push()
                     }
                 }
             }
         }
-        
-        stage('Déploiement sur Kubernetes') {
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                // Déployer l'application sur Kubernetes en utilisant Helm
+                withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
+                    sh '''
+                        export KUBECONFIG=$KUBECONFIG
+                        helm upgrade --install --namespace dev --version ${env.CHART_VERSION} nom-de-votre-release ./charts
+                    '''
+                }
+            }
+        }
+
+        stage('Manual Deployment to Production') {
             when {
-                expression { params.ENVIRONNEMENT != 'prod' }
+                branch 'master'
             }
             steps {
-                sh "kubectl apply -f manifests/${params.ENVIRONNEMENT}/"
+                input "Confirmez-vous le déploiement en environnement de production ?"
+                // Déployer manuellement en production
+                withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
+                    sh '''
+                        export KUBECONFIG=$KUBECONFIG
+                        helm upgrade --install --namespace prod --version ${env.CHART_VERSION} nom-de-votre-release ./charts
+                    '''
+                }
             }
-        }
-    }
-    
-    post {
-        success {
-            echo 'Le déploiement est réussi!'
-        }
-        failure {
-            echo 'Le déploiement a échoué. Veuillez vérifier les logs pour plus de détails.'
         }
     }
 }

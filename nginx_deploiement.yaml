@@ -18,11 +18,11 @@ spec:
       - name: nginx
         image: nginx:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 80
         volumeMounts:
         - name: nginx-config
           mountPath: /etc/nginx/conf.d/default.conf
       volumes:
       - name: nginx-config
         hostPath:
-          path: /path/to/nginx_config.conf  # Remplacez par le chemin absolu vers votre fichier nginx_config.conf
+          path: /home/ubuntu/jenkins_exam/jenkins-exam-repo/nginx_config.conf  # Remplacez par le chemin absolu vers votre fichier nginx_config.conf
