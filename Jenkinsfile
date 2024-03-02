@@ -34,7 +34,7 @@ pipeline {
             }
         }
         
-        //stage('Construction de l\'application') {
+        //stage('Construction de l\'application')jj {
         //    steps {
         //        sh 'pip install -r requirements.txt' // Remplacez cette commande par celle correspondant à votre processus de construction
         //    }
