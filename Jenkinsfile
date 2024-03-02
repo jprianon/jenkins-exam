@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+<<<<<<< HEAD
                 // Récupérer le code depuis le dépôt GitHub
                 git credentialsId: 'amazon-jp_bk', url: 'https://github.com/jprianon/examenjenkins-exam.git'
             }
@@ -28,6 +29,28 @@ pipeline {
         }
 
         stage('Deploy to Kubernetes') {
+=======
+                git branch: 'master', url: 'https://github.com/jprianon/jenkins-exam.git'
+            }
+        }
+        
+        //stage('Construction de l\'application') {
+        //    steps {
+        //        sh 'pip install -r requirements.txt' // Remplacez cette commande par celle correspondant à votre processus de construction
+        //    }
+        //}
+        
+        //stage('Tests de l\'application') {
+        //    steps {
+        //        sh 'mvn test' // Remplacez cette commande par celle correspondant à vos tests
+        //    }
+        //}
+        
+        stage('Construction de l\'image Docker') {
+            when {
+                expression { params.ENVIRONNEMENT == 'prod' }
+            }
+>>>>>>> 78c43b6fcf8b1ad911e0484692690088e5738835
             steps {
                 // Déployer l'application sur Kubernetes en utilisant Helm
                 withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
