@@ -2,7 +2,9 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_CREDENTIALS = "jprianon"
+        DOCKER_ID = "jprianon"
+        DOCKER_IMAGE = "jenkins-exam"
+        DOCKER_TAG = "v.${BUILD_ID}.0"
         KUBECONFIG = "kubeconfig-id"
         CHART_VERSION = '1.0.0'
     }
@@ -19,17 +21,35 @@ pipeline {
                 }
             }
         
-        stage('Build and Push Docker Image') {
+        stage('Docker Push'){ //we pass the built image to our docker hub account
+            environment
+            {
+                DOCKER_PASS = credentials("DOCKER_HUB_PASS") // we retrieve  docker password from secret text called docker_hub_pass saved on jenkins
+            }
+
             steps {
-                // Construire et pousser l'image Docker sur DockerHub
+
                 script {
-                    docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
-                        docker.build("jprianon/jenkins-exam:${env.CHART_VERSION}")
-                        docker.image("jprianon/jenkins-exam:${env.CHART_VERSION}").push()
-                    }
+                sh '''
+                docker login -u $DOCKER_ID -p $DOCKER_PASS
+                docker push $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG
+                '''
                 }
             }
+
         }
+
+        //stage('Build and Push Docker Image') {
+        //    steps {
+        //        // Construire et pousser l'image Docker sur DockerHub
+        //        script {
+        //            docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
+        //                docker.build("jprianon/jenkins-exam:${env.CHART_VERSION}")
+        //                docker.image("jprianon/jenkins-exam:${env.CHART_VERSION}").push()
+        //            }
+        //        }
+        //    }
+        //}
 
         stage('Deploy to Kubernetes') {
             steps {
