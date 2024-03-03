@@ -12,8 +12,8 @@ pipeline {
                     script {
                     sh '''
                     ls
-                    cd /opt/ && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                    docker-compose -f /opt/jenkins-exam/docker-compose.yml build
+                    mkdir repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
+                    docker-compose -f repo/jenkins-exam/docker-compose.yml build
                     '''
                     }
                 }
