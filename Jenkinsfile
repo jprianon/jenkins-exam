@@ -12,7 +12,7 @@ pipeline {
                     script {
                     sh '''
                     ls
-                    mkdir repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
+                    mkdir repo && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
                     docker-compose -f repo/jenkins-exam/docker-compose.yml build
                     '''
                     }
