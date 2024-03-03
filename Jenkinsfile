@@ -13,17 +13,12 @@ pipeline {
                     sh '''
                     ls
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
+                    docker rm -f ejenkins-exam*
                     docker-compose -f jenkins-exam/docker-compose.yml build
                     '''
                     }
                 }
             }
-    
-        stage('Checkout') {
-            steps {
-                git credentialsId: 'master', url: 'https://github.com/jprianon/jenkins-exam.git'
-            }
-        }
         
         stage('Build and Push Docker Image') {
             steps {
