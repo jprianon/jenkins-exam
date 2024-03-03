@@ -13,7 +13,7 @@ pipeline {
                     sh '''
                     ls
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                    docker-compose -f repo/jenkins-exam/docker-compose.yml build
+                    docker-compose -f jenkins-exam/docker-compose.yml build
                     '''
                     }
                 }
