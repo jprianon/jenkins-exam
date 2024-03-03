@@ -6,17 +6,17 @@ pipeline {
         KUBECONFIG = "kubeconfig-id"
         CHART_VERSION = '1.0.0'
     }
-    
-    stage(' Docker Build'){ // docker build image stage
-            steps {
-                script {
-                  sh '''
-                  cd /opt/ && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                  docker-compose -f /opt/jenkins-exam/docker-compose.yml build
-                  '''
+    stages {
+        stage('Docker Build'){ // docker build image stage
+                steps {
+                    script {
+                    sh '''
+                    cd /opt/ && git clone 'https://github.com/jprianon/jenkins-exam.git'
+                    docker-compose -f /opt/jenkins-exam/docker-compose.yml build
+                    '''
+                    }
                 }
             }
-        }
 
     stages {
         stage('Checkout') {
