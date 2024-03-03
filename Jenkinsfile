@@ -18,9 +18,7 @@ pipeline {
                     }
                 }
             }
-    }
-
-    stages {
+    
         stage('Checkout') {
             steps {
                 git credentialsId: 'master', url: 'https://github.com/jprianon/jenkins-exam.git'
