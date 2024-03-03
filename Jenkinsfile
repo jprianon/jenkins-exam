@@ -7,7 +7,7 @@ pipeline {
         CHART_VERSION = '1.0.0'
     }
     stages {
-        stage('Docker Build'){ // docker build image stage
+        stage('Docker Build'){
                 steps {
                     script {
                     sh '''
