@@ -2,8 +2,8 @@ pipeline {
     agent any
     
     environment {
-        DOCKER_CREDENTIALS = credentials('jprianon')
-        KUBECONFIG = credentials('kubeconfig-id')
+        DOCKER_CREDENTIALS = "jprianon"
+        KUBECONFIG = "kubeconfig-id"
         CHART_VERSION = '1.0.0'
     }
 
