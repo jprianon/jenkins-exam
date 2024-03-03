@@ -16,7 +16,7 @@ pipeline {
         
         stage('Build and Push Docker Image') {
             steps {
-                // Construire et pousser l'image Docker vers DockerHub ! 
+                // Construire et pousser l'image Docker vers DockerHub !!
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
                         docker.build("jprianon/jenkins-exam:${env.CHART_VERSION}")
