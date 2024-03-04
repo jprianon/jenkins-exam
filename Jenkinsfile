@@ -61,8 +61,9 @@ pipeline {
                 // Déployer l'application sur Kubernetes en utilisant Helm
                 //withCredentials([file(credentialsId: '/home/ubuntu/.kube', variable: 'KUBECONFIG')]) {
                     sh '''
+                    
                         export KUBECONFIG=$KUBECONFIG
-                        helm upgrade --install --namespace dev --version ${env.CHART_VERSION} jenkin-exam ./charts
+                        helm upgrade --install --namespace dev jenkin-exam ./charts
                     '''
                 }
             }
