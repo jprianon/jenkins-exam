@@ -57,16 +57,22 @@ pipeline {
         //}
 
         stage('Deploy to Kubernetes') {
-            steps {
-                // Déployer l'application sur Kubernetes en utilisant Helm !
-                //withCredentials([file(credentialsId: '/home/ubuntu/.kube', variable: 'KUBECONFIG')]) {
-                    sh '''
-                        export KUBECONFIG=$KUBECONFIG
-                        helm upgrade --install --namespace dev jenkin-exam ./charts
-                    '''
-                }
+             environment
+            {
+            KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
             }
-        
+                steps {
+                    script {
+                    sh '''
+                    rm -Rf .kube
+                    mkdir .kube
+                    ls
+                    cat $KUBECONFIG > .kube/config
+                    helm upgrade --install --namespace dev jenkin-exam ./charts
+                    '''
+                    }
+                }
+        }
 
         stage('Manual Deployment to Production') {
             when {
