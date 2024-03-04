@@ -5,7 +5,7 @@ pipeline {
         DOCKER_ID = "jprianon"
         DOCKER_IMAGE = "jenkins-exam"
         DOCKER_TAG = "v.${BUILD_ID}.0"
-        KUBECONFIG = "kubeconfig-id"
+        KUBECONFIG = "/home/ubuntu/.kube"
         CHART_VERSION = '1.0.0'
     }
     stages {
@@ -59,10 +59,10 @@ pipeline {
         stage('Deploy to Kubernetes') {
             steps {
                 // Déployer l'application sur Kubernetes en utilisant Helm
-                withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
+                withCredentials([file(credentialsId: '/home/ubuntu/.kube', variable: 'KUBECONFIG')]) {
                     sh '''
                         export KUBECONFIG=$KUBECONFIG
-                        helm upgrade --install --namespace dev --version ${env.CHART_VERSION} nom-de-votre-release ./charts
+                        helm upgrade --install --namespace dev --version ${env.CHART_VERSION} jenkin-exam ./charts
                     '''
                 }
             }
