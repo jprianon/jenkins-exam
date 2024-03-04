@@ -24,16 +24,16 @@ pipeline {
             }
         
         stage('Docker Push'){ //we pass the built image to our docker hub accountt
-            environment
-            {
-                DOCKER_PASS = credentials("DOCKER_HUB_PASS") // we retrieve  docker password from secret text called docker_hub_pass saved on jenkins
-            }
+            //environment
+            //{
+            //    DOCKER_PASS = credentials("DOCKER_HUB_PASS") // we retrieve  docker password from secret text called docker_hub_pass saved on jenkins
+            //}
 
             steps {
 
                 script {
                 sh '''
-                docker login -u $DOCKER_ID -p $DOCKER_PASS
+                docker login -u $DOCKER_ID -p dckr_pat_KdmVj2VyGObjtG6RE-rvJqinXb0
                 docker push jenkins-exam_cast_service:latest
                 docker push jenkins-exam_movie_service:latest
                 '''
