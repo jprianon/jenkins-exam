@@ -85,7 +85,7 @@ pipeline {
         }
     }
 }
-//
+///
 //
 //pipeline {
 //environment { // Declaration of environment variables
