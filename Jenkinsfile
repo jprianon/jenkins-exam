@@ -66,7 +66,7 @@ pipeline {
                     '''
                 }
             }
-        }
+        
 
         stage('Manual Deployment to Production') {
             when {
