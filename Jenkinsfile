@@ -21,7 +21,7 @@ pipeline {
                 }
             }
         
-        stage('Docker Push'){ //we pass the built image to our docker hub account
+        stage('Docker Push'){ //we pass the built image to our docker hub accoun
             environment
             {
                 DOCKER_PASS = credentials("DOCKER_HUB_PASS") // we retrieve  docker password from secret text called docker_hub_pass saved on jenkins
