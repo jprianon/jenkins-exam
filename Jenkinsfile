@@ -16,6 +16,8 @@ pipeline {
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
                     docker rm -f jenkins-exam*
                     docker-compose -f jenkins-exam/docker-compose.yml build
+                    docker ps
+                    docker images
                     '''
                     }
                 }
