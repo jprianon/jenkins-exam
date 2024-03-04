@@ -34,7 +34,8 @@ pipeline {
                 script {
                 sh '''
                 docker login -u $DOCKER_ID -p $DOCKER_PASS
-                docker push $DOCKER_ID/$DOCKER_IMAGE:$DOCKER_TAG
+                docker push jenkins-exam_cast_service:$DOCKER_TAG
+                docker push jenkins-exam_movie_service:$DOCKER_TAG
                 '''
                 }
             }
