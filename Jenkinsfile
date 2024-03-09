@@ -15,18 +15,21 @@ pipeline {
                     sh '''
                     ls -lrt 
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
-
                     containers=$(docker ps -a --format "{{.Names}}" | grep ^jenkins-exam)
                         if [ -z "$containers" ]; then
-                            echo "No containers"
+                            echo "Aucun conteneur Docker commençant par 'jenkins-exam' n'existe."
+                            docker-compose -f jenkins-exam/docker-compose.yml build
+                            docker ps
+                            docker images
                         else
-                            echo "Delete container"
-                            docker ps -a | grep jenkins-exam | awk '{print $1}' | xargs docker rm
+                            echo "Suppression des conteneurs Docker suivants commençant par 'jenkins-exam' :"
+                            echo "$containers"
+                            # Supprimer les conteneurs
+                            echo "$containers" | xargs docker rm -f
                             docker-compose -f jenkins-exam/docker-compose.yml build
                             docker ps
                             docker images
                         fi
-
                     '''
                     }
                 }
