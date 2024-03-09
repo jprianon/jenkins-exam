@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: cast-service
-        image: votre-utilisateur/cast-service:latest  # Remplacez par l'image Docker construite pour votre service cast_service.
+        image: votre-utilisateur/cast-service:latest  # Remplacez par l'image Docker construite pour votre service cast_servic
         ports:
         - containerPort: 8000
         env:
