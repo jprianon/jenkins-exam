@@ -10,5 +10,5 @@ spec:
     app: myapp
   ports:
     - protocol: TCP
-      port: {{ .Values.service.port }}  # Port exposé par le service
+      port: {{ .Values.service.port }}  # Port exposé par le service !
       targetPort: {{ .Values.service.port }}  # Port cible sur le pod
