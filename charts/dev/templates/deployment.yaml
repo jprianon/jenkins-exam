@@ -16,7 +16,7 @@ spec:
         app: cast-app
     spec:
       containers:
-      - name: jenkins-exam_cast_service
-        image: jenkins-exam_cast_service:latest  # Image Docker à déployer !!:
+      - name: jenkins-exam-cast-service
+        image: jenkins-exam-cast-service:latest  # Image Docker à déployer !!:
         ports:
         - containerPort: {{ .Values.service.port }}  # Port sur lequel l'application écoute
