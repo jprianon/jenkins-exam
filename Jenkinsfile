@@ -44,18 +44,6 @@ pipeline {
 
         }
 
-        //stage('Build and Push Docker Image') {
-        //    steps {
-        //        /// Construire et pousser l'image Docker sur DockerHub
-        //        script {
-        //            docker.withRegistry('https://index.docker.io/v1/', DOCKER_CREDENTIALS) {
-        //                docker.build("jprianon/jenkins-exam:${env.CHART_VERSION}")
-        //                docker.image("jprianon/jenkins-exam:${env.CHART_VERSION}").push()
-        //            }
-        //        }
-        //    }
-        //}
-
         stage('Deploy to Kubernetes') {
              environment
             {
@@ -68,7 +56,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install --namespace dev jenkin-exam ./charts/dev
+                    helm upgrade --install --namespace myapp jenkin-exam ./charts/dev
                     kubectl --kubeconfig=$KUBECONFIG apply -f manifests/dev.yaml --namespace=$NAMESPACE_DEV'
             }
                     '''
