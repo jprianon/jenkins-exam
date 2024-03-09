@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: {{ .Release.Name }}-service  # Nom du service, prendra le nom de la release
   labels:
-    app: myapp
+    app: cast-app
     environment: dev
 spec:
   selector:
-    app: myapp
+    app: cast-app
   ports:
     - protocol: TCP
       port: {{ .Values.service.port }}  # Port exposé par le service !
