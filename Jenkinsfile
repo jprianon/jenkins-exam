@@ -15,7 +15,7 @@ pipeline {
                     sh '''
                     ls -lrt 
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                    containers=$(docker ps -a --format "{{.Names}}" | grep ^jenkins-exam)
+                    containers=$(docker ps -a | grep jenkins-exam | awk '{print $1}' | xargs docker rm)
                         if [ -z "$containers" ]; then
                             echo "Aucun conteneur Docker commençant par 'jenkins-exam' n'existe."
                             docker-compose -f jenkins-exam/docker-compose.yml build
