@@ -60,7 +60,6 @@ pipeline {
 
                     #helm upgrade --install movie-cast-app helm-chart/ --namespace prod --set image.tag=${BUILD_NUMBER}'
                     #kubectl --kubeconfig=$KUBECONFIG apply -f manifests/dev.yaml --namespace=$NAMESPACE_DEV'
-            }
                     '''
                     }
                 }
