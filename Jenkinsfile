@@ -5,7 +5,7 @@ pipeline {
         DOCKER_ID = "jprianon"
         DOCKER_IMAGE = "jenkins-exam"
         DOCKER_TAG = "v.${BUILD_ID}.0"
-        KUBECONFIG = "/home/ubuntu/.kube"
+        KUBECONFIG = "/home/ubuntu/.kube/config"
         CHART_VERSION = '1.0.0'
     }
     stages {
