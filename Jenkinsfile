@@ -15,10 +15,18 @@ pipeline {
                     sh '''
                     ls -lrt 
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                    docker ps -a | grep jenkins-exam | awk '{print $1}' | xargs docker rm
-                    docker-compose -f jenkins-exam/docker-compose.yml build
-                    docker ps
-                    docker images
+
+                    containers=$(docker ps -a --format "{{.Names}}" | grep ^jenkins-exam)
+                        if [ -z "$containers" ]; then
+                            echo "No containers"
+                        else
+                            echo "Delete container"
+                            docker ps -a | grep jenkins-exam | awk '{print $1}' | xargs docker rm
+                            docker-compose -f jenkins-exam/docker-compose.yml build
+                            docker ps
+                            docker images
+                        fi
+
                     '''
                     }
                 }
