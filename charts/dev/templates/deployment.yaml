@@ -18,3 +18,5 @@ spec:
       containers:
       - name: monapp-container
         image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  # Image Docker à déployer
+        ports:
+        - containerPort: {{ .Values.service.port }}  # Port sur lequel l'application écoute

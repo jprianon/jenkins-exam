@@ -68,7 +68,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install --namespace dev jenkin-exam ./charts
+                    helm upgrade --install --namespace dev jenkin-exam ./charts/dev
                     kubectl --kubeconfig=$KUBECONFIG apply -f manifests/dev.yaml --namespace=$NAMESPACE_DEV'
             }
                     '''

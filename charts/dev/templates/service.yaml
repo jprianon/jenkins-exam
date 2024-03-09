@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service  # Nom du service, prendra le nom de la release
+  labels:
+    app: myapp
+    environment: dev
+spec:
+  selector:
+    app: myapp
+  ports:
+    - protocol: TCP
+      port: {{ .Values.service.port }}  # Port exposé par le service
+      targetPort: {{ .Values.service.port }}  # Port cible sur le pod
