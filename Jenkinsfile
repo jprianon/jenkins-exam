@@ -71,7 +71,7 @@ pipeline {
             }
             steps {
                 input "Confirmez-vous le déploiement en environnement de production ?"
-                // Déployer manuellement en production !
+                // Déployer manuellement en production !!
                 withCredentials([file(credentialsId: 'kubeconfig-id', variable: 'KUBECONFIG')]) {
                     sh '''
                         export KUBECONFIG=$KUBECONFIG
