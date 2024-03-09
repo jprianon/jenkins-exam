@@ -15,7 +15,7 @@ pipeline {
                     sh '''
                     ls -lrt 
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                    docker rm -f jenkins-exam*
+                    docker ps -a | awk '$NF ~ /^jenkin-exam/ {print $1}' | xargs docker rm
                     docker-compose -f jenkins-exam/docker-compose.yml build
                     docker ps
                     docker images
