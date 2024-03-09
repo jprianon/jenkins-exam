@@ -1,0 +1,5 @@
+apiVersion: v2
+name: myapp-dev  # Nom du chart pour l'environnement dev
+description: Helm chart pour le déploiement de mon application en environnement de développement.
+version: 0.1.0
+appVersion: 1.0.0

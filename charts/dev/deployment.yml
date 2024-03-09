@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-app  # Nom du déploiement, prendra le nom de la release
+  labels:
+    app: myapp
+    environment: dev
+spec:
+  replicas: {{ .Values.replicaCount | default 1 }}  # Nombre de réplicas configurable
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: monapp-container
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  # Image Docker à déployer
