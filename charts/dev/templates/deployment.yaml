@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-app  # Nom du déploiement, prendra le nom de la release
+  name: {{ .Release.Name }}  # Nom du déploiement, prendra le nom de la release
   labels:
     app: cast-app
     environment: dev
