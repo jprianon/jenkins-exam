@@ -15,7 +15,7 @@ pipeline {
                     sh '''
                     ls -lrt 
                     rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                    docker rm $(docker ps -aq --filter "name=jenkin-exam")
+                    docker ps -a | grep jenkins-exam | awk '{print $1}' | xargs docker rm
                     docker-compose -f jenkins-exam/docker-compose.yml build
                     docker ps
                     docker images
