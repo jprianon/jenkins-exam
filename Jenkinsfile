@@ -69,7 +69,8 @@ pipeline {
                     ls
                     cat $KUBECONFIG > .kube/config
                     helm upgrade --install microservice-fastapi-app charts/dev --namespace dev --values=./charts/dev/values.yaml
-
+                    helm ls
+                    kubectl get deploy,svc,Pod
                     #helm upgrade --install movie-cast-app helm-chart/ --namespace prod --set image.tag=${BUILD_NUMBER}'
                     #kubectl --kubeconfig=$KUBECONFIG apply -f manifests/dev.yaml --namespace=$NAMESPACE_DEV'
                     '''
