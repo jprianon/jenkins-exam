@@ -56,8 +56,8 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install myapp charts/dev --namespace dev --set image.tag=enkins-exam_cast_service:latest
-                    
+                    helm upgrade --install myapp charts/dev --namespace dev --values=./charts/dev/values.yaml
+
                     #helm upgrade --install movie-cast-app helm-chart/ --namespace prod --set image.tag=${BUILD_NUMBER}'
                     #kubectl --kubeconfig=$KUBECONFIG apply -f manifests/dev.yaml --namespace=$NAMESPACE_DEV'
             }
