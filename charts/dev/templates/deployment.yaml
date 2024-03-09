@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-app  # Nom du déploiement, prendra le nom de la release
   labels:
-    app: myapp
+    app: cast-app
     environment: dev
 spec:
   replicas: {{ .Values.replicaCount | default 1 }}  # Nombre de réplicas configurable
   selector:
     matchLabels:
-      app: myapp
+      app: cast-app
   template:
     metadata:
       labels:
-        app: myapp
+        app: cast-app
     spec:
       containers:
-      - name: monapp-container
-        image: {{ .Values.image.repository }}  # Image Docker à déployer !!:
+      - name: jenkins-exam_cast_service
+        image: jenkins-exam_cast_service:latest  # Image Docker à déployer !!:
         ports:
         - containerPort: {{ .Values.service.port }}  # Port sur lequel l'application écoute

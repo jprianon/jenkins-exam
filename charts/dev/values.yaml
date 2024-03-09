@@ -1,6 +1,6 @@
 image:
-  repository: myapp  # Nom du référentiel Docker où se trouve l'image de l'application
+  repository: jenkins-exam_cast_service  # Nom du référentiel Docker où se trouve l'image de l'application
   tag: latest  # Tag de l'image Docker à déployer
 replicaCount: 1  # Nombre de réplicas par défaut pour le déploiement
 service:
-  port: 80  # Port exposé par le service
+  port: 8002  # Port exposé par le service

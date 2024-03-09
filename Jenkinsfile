@@ -35,7 +35,7 @@ pipeline {
                 sh '''
                 docker login -u $DOCKER_ID -p dckr_pat_KdmVj2VyGObjtG6RE-rvJqinXb0
                 docker tag jenkins-exam_cast_service jprianon/jenkins-exam_cast_service
-                docker tag jenkins-exam_cast_service jprianon/jenkins-exam_movie_service
+                docker tag jenkins-exam_movie_service jprianon/jenkins-exam_movie_service
                 docker push jprianon/jenkins-exam_cast_service:latest
                 docker push jprianon/jenkins-exam_movie_service:latest
                 '''
