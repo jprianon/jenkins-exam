@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}  # Nom du déploiement, prendra le nom de la release
+  name: {{ .Release.Name }}-app  # Nom du déploiement, prendra le nom de la release
   labels:
-    app: cast-app
+    app: {{ .Release.Name }}-app
     environment: dev
 spec:
   replicas: {{ .Values.replicaCount | default 1 }}  # Nombre de réplicas configurable
   selector:
     matchLabels:
-      app: cast-app
+      app: {{ .Release.Name }}-app
   template:
     metadata:
       labels:
-        app: cast-app
+        app: {{ .Release.Name }}-app
     spec:
       containers:
       - name: jenkins-exam-cast-service
         image: jprianon/jenkins-exam-cast-service:latest  # Image Docker à déployer !!:
         ports:
-        - containerPort: {{ .Values.service.port }}  # Port sur lequel l'application écoute
+          - containerPort: {{ .Values.service.port }}  # Port sur lequel l'application écoute

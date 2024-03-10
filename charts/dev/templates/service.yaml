@@ -4,7 +4,6 @@ metadata:
   name: {{ .Release.Name }}-app  # Nom du service, prendra le nom de la release
   labels:
     app: {{ .Release.Name }}-app
-    environment: dev
 spec:
   selector:
     app: {{ .Release.Name }}-app
