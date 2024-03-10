@@ -11,4 +11,4 @@ spec:
   ports:
     - protocol: TCP
       port: {{ .Values.service.port }}  # Port exposé par le service !
-      targetPort: {{ .Values.service.port }}  # Port cible sur le pod
+      #targetPort: {{ .Values.service.port }}  # Port cible sur le pod
