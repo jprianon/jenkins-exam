@@ -7,9 +7,10 @@ metadata:
     environment: dev
 spec:
   selector:
-  type: {{ .Values.service.type }}
     app: {{ .Release.Name }}-app
+  type: {{ .Values.service.type }}
   ports:
     - protocol: TCP
+      targetPort: 8000
       port: {{ .Values.service.port }}  # Port exposé par le service !
       #targetPort: {{ .Values.service.port }}  # Port cible sur le pod

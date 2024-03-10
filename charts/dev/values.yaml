@@ -3,5 +3,5 @@ image:
   tag: latest  # Tag de l'image Docker à déployer
 replicaCount: 2  # Nombre de réplicas par défaut pour le déploiement
 service:
-  type: pod
+  type: NodePort
   port: 8002  # Port exposé par le service
