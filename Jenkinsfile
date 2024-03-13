@@ -49,10 +49,10 @@ pipeline {
                 steps {
                     script {
                     sh '''
-                    #rm -Rf .kube
-                    #mkdir .kube
-                    #ls
-                    #cat $KUBECONFIG > .kube/config
+                    rm -Rf .kube
+                    mkdir .kube
+                    ls
+                    cat $KUBECONFIG > .kube/config
                     helm upgrade --install ms-fastapi-dev  ms-fastapi-chart/dev --namespace dev --values=./ms-fastapi-chart/dev/values.yaml
                     helm ls
                     kubectl get deploy,svc,Pod
