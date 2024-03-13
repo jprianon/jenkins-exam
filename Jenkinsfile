@@ -53,7 +53,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install ms-fastapi  ms-fastapi-charts/dev --namespace dev --values=./ms-fastapi-charts/dev/values.yaml
+                    helm upgrade --install ms-fastapi  ms-fastapi-chart/dev --namespace dev --values=./ms-fastapi-chart/dev/values.yaml
                     helm ls
                     kubectl get deploy,svc,Pod
                     #helm upgrade --install movie-cast-app helm-chart/ --namespace prod --set image.tag=${BUILD_NUMBER}'
