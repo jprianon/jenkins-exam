@@ -1,0 +1,12 @@
+# templates/postgres/cast_db_service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-cast-db
+spec:
+  selector:
+    app: cast-db
+  ports:
+  - protocol: TCP
+    port: {{ .Values.postgres.cast_db.servicePort }}
+    targetPort: 5432

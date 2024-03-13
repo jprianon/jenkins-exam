@@ -13,23 +13,8 @@ pipeline {
                 steps {
                     script {
                     sh '''
-                    ls -lrt 
-                    rm -rf repo/* && cd repo && git clone 'https://github.com/jprianon/jenkins-exam.git'
-                    containers=$(docker ps -a | grep jenkins-exam | awk '{print $1}')
-                        if [ -z "$containers" ]; then
-                            echo "No container 'jenkins-exam'."
-                            docker-compose -f jenkins-exam/docker-compose.yml build
-                            docker ps
-                            docker images
-                        else
-                            echo "Suppression des conteneurs Docker suivants commençant par 'jenkins-exam' :"
-                            echo "$containers"
-                            # Supprimer les conteneurs
-                            echo "$containers" | xargs docker rm -f 
-                            docker-compose -f jenkins-exam/docker-compose.yml build
-                            docker ps
-                            docker images
-                        fi
+                    docker build -t jprianon/jenkins-exam-cast-service ./cast-service
+                    docker build -t jprianon/jenkins-exam-movie-service ./movie-service
                     '''
                     }
                 }
@@ -56,7 +41,7 @@ pipeline {
 
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Deploy to Kubernetes-dev') {
              environment
             {
             KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
@@ -68,7 +53,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install ms-fastapi4  charts/dev --namespace dev --values=./charts/dev/values.yaml
+                    helm upgrade --install ms-fastapi  ms-fastapi-charts/dev --namespace dev --values=./ms-fastapi-charts/dev/values.yaml
                     helm ls
                     kubectl get deploy,svc,Pod
                     #helm upgrade --install movie-cast-app helm-chart/ --namespace prod --set image.tag=${BUILD_NUMBER}'

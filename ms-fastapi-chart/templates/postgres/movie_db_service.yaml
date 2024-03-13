@@ -1,0 +1,12 @@
+# templates/postgres/cast_db_service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-movie-db
+spec:
+  selector:
+    app: movie-db
+  ports:
+  - protocol: TCP
+    port: {{ .Values.postgres.movie_db.servicePort }}
+    targetPort: 5432

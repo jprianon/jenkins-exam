@@ -1,0 +1,18 @@
+# templates/nginx/configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-nginx-config
+data:
+  default.conf: |
+    server {
+        listen 80;
+
+        location / {
+            proxy_pass http://ms-fastapi-movie-service:8000;
+        }
+
+        location /api/cast {
+            proxy_pass http://ms-fastapi-cast-service:8000;
+        }
+    }

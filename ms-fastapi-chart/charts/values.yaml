@@ -1,0 +1,61 @@
+movieService:
+  image:
+    repository: jprianon/jenkins-exam-movie-service
+    tag: latest
+  port: 8000
+  externalPort: 8001
+  databaseUri: postgresql://movie_db_username:movie_db_password@movie_db/movie_db_dev
+  dependsOnDatabase: true
+
+castService:
+  image:
+    repository: jprianon/jenkins-exam-cast-service
+    tag: latest
+  port: 8000
+  externalPort: 8002
+  databaseUri: postgresql://cast_db_username:cast_db_password@cast_db/cast_db_dev
+  dependsOnDatabase: true
+
+nginx:
+  image:
+    repository: nginx
+    tag: latest
+  config:
+    default.conf: |
+      server {
+          listen 80;
+
+          location / {
+              proxy_pass http://ms-fastapi-movie-service:8000;
+          }
+
+          location /api/cast {
+              proxy_pass http://ms-fastapi-cast-service:8000;
+          }
+      }
+  service:
+    type: NodePort
+    nodePort: 32000
+
+postgres:
+  movie_db:
+    image:
+      repository: postgres
+      tag: 12.1-alpine
+    database:
+      name: movie_db_dev
+    credentials:
+      username: movie_db_username
+      password: movie_db_password
+    servicePort: 8001
+
+  cast_db:
+    image:
+      repository: postgres
+      tag: 12.1-alpine
+    database:
+      name: cast_db_dev
+    credentials:
+      username: cast_db_username
+      password: cast_db_password
+    servicePort: 8002

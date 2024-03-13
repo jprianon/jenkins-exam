@@ -1,0 +1,27 @@
+# templates/postgres/movie_db/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-movie-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: movie-db
+  template:
+    metadata:
+      labels:
+        app: movie-db
+    spec:
+      containers:
+      - name: postgres
+        image: {{ .Values.postgres.movie_db.image.repository }}:{{ .Values.postgres.movie_db.image.tag }}
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: {{ .Values.postgres.movie_db.credentials.username }}
+        - name: POSTGRES_PASSWORD
+          value: {{ .Values.postgres.movie_db.credentials.password }}
+        - name: POSTGRES_DB
+          value: {{ .Values.postgres.movie_db.database.name }}
