@@ -107,9 +107,7 @@ pipeline {
                     helm upgrade --install ms-fastapi  helmchart --namespace staging --values ms-fastapi-chart/values-staging.yaml
                     kubectl get deploy,svc,Pod -n staging
                     '''
-                    }
                 }
             }
         }
     }
-}
