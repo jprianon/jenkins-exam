@@ -37,9 +37,9 @@ pipeline {
         }
 
         stage('Deploy to Dev') {
-             environment
-            {
-            KUBECONFIG = credentials("config")
+            environment {
+                KUBECONFIG = credentials("config")
+            }
                 steps {
                     script {
                     sh '''
@@ -55,9 +55,8 @@ pipeline {
         }
 
         stage('Deploy to QA') {
-             environment
-            {
-            KUBECONFIG = credentials("config")
+            environment {
+                KUBECONFIG = credentials("config")
             }
                 steps {
                     script {
@@ -74,9 +73,8 @@ pipeline {
         }
 
         stage('Deploy to Staging') {
-             environment
-            {
-            KUBECONFIG = credentials("config")
+            environment {
+                KUBECONFIG = credentials("config")
             }
                 steps {
                     script {
