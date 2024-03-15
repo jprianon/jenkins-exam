@@ -31,16 +31,3 @@ spec:
         - name: cast-service-volume
           hostPath:
             path: ./
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: {{ .Release.Name }}-cast-service
-  labels:
-    app: cast-service
-spec:
-  ports:
-    - port: 8002
-      targetPort: 8000
-  selector:
-    app: cast-service

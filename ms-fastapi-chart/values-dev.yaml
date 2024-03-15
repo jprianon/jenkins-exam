@@ -35,7 +35,7 @@ nginx:
       }
   service:
     type: NodePort
-    nodePort: 32000
+    nodePort: 80
 
 postgres:
   movie_db:
