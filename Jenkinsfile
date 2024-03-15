@@ -22,7 +22,6 @@ pipeline {
         
         stage('Docker Push'){ 
             steps {
-
                 script {
                 sh '''
                 docker login -u $DOCKER_ID -p dckr_pat_KdmVj2VyGObjtG6RE-rvJqinXb0
@@ -108,6 +107,7 @@ pipeline {
                     helm upgrade --install ms-fastapi  helmchart --namespace staging --values ms-fastapi-chart/values-staging.yaml
                     kubectl get deploy,svc,Pod -n staging
                     '''
+                    }
                 }
             }
         }
