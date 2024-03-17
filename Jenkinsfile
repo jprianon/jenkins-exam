@@ -48,7 +48,7 @@ pipeline {
                     rm -Rf .kube
                     mkdir .kube
                     ls
-                    cat $KUBECONFIG > .kube/config
+                    sudo cat $KUBECONFIG > .kube/config
                     helm upgrade --install ms-fastapi-dev  helmchart --namespace dev --values helmchart/values-dev.yaml
                     kubectl get deploy,svc,Pod -n dev
                     '''
