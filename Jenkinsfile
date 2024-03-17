@@ -95,7 +95,7 @@ pipeline {
             when {
                 expression {
                     echo "Current branch: ${env.GIT_BRANCH}"
-                    env.GIT_BRANCH == "origin/master"
+                    env.GIT_BRANCH == "master/master"
                 }
             }
             steps {
