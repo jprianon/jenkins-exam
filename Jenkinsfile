@@ -108,7 +108,7 @@ pipeline {
                     ls 
                     whoami
                     sudo chmod +r $KUBECONFIG
-                    cp $KUBECONFIG .kube/config
+                    sudo cp $KUBECONFIG .kube/config
                     cat $KUBECONFIG > .kube/config
                     helm upgrade --install ms-fastapi-prod  helmchart --namespace prod --values helmchart/values-prod.yaml
                     sudo kubectl get deploy,svc,Pod -n prod
