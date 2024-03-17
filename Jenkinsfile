@@ -93,7 +93,9 @@ pipeline {
 
         stage('Manual Deployment to Production') {
             when {
-                branch 'origin/master'
+                expression {
+                    env.GIT_BRANCH == "origin/master"
+                }
             }
             steps {
                 input message: 'Deploy to prod environment ?', ok: 'yes'
