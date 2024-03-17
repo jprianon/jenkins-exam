@@ -46,7 +46,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install ms-fastapi  helmchart --namespace dev --values helmchart/values-dev.yaml
+                    helm upgrade --install ms-fastapi-dev  helmchart --namespace dev --values helmchart/values-dev.yaml
                     kubectl get deploy,svc,Pod -n dev
                     '''
                     }
@@ -64,7 +64,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install ms-fastapi  helmchart --namespace qa --values helmchart/values-qa.yaml
+                    helm upgrade --install ms-fastapi-qa  helmchart --namespace qa --values helmchart/values-qa.yaml
                     kubectl get deploy,svc,Pod -n qa
                     '''
                     }
@@ -82,7 +82,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install ms-fastapi  helmchart --namespace staging --values helmchart/values-staging.yaml
+                    helm upgrade --install ms-fastapi-staging  helmchart --namespace staging --values helmchart/values-staging.yaml
                     kubectl get deploy,svc,Pod -n staging
                     '''
                     }
@@ -103,7 +103,7 @@ pipeline {
                     mkdir .kube
                     ls
                     cat $KUBECONFIG > .kube/config
-                    helm upgrade --install ms-fastapi  helmchart --namespace staging --values helmchart/values-staging.yaml
+                    helm upgrade --install ms-fastapi-prod  helmchart --namespace staging --values helmchart/values-staging.yaml
                     kubectl get deploy,svc,Pod -n staging #
                     '''
                 }
