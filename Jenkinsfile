@@ -107,6 +107,7 @@ pipeline {
                     ls 
                     whoami
                     sudo mkdir -p .kube
+                    sudo chmod 755 .kube
                     sudo chmod +r $KUBECONFIG
                     sudo cp $KUBECONFIG .kube/config
                     cat $KUBECONFIG > .kube/config
