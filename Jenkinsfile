@@ -13,8 +13,8 @@ pipeline {
                 steps {
                     script {
                     sh '''
-                    docker build -t jprianon/jenkins-exam-cast-service ./cast-service
-                    docker build -t jprianon/jenkins-exam-movie-service ./movie-service
+                    docker build -t jprianon/jenkins-exam-cast-service ./Jenkins-exam/cast-service
+                    docker build -t jprianon/jenkins-exam-movie-service ./Jenkins-exam/movie-service
                     '''
                     }
                 }
