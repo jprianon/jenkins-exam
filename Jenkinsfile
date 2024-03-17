@@ -104,8 +104,6 @@ pipeline {
                     sh '''
                     rm -Rf .kube
                     mkdir .kube
-                    ls -lrt 
-                    whoami
                     cp $KUBECONFIG .kube/config
                     cat $KUBECONFIG > .kube/config
                     helm upgrade --install ms-fastapi-prod  helmchart --namespace prod --values helmchart/values-prod.yaml
