@@ -94,6 +94,7 @@ pipeline {
         stage('Manual Deployment to Production') {
             when {
                 expression {
+                    echo "Current branch: ${env.GIT_BRANCH}"
                     env.GIT_BRANCH == "origin/master"
                 }
             }
