@@ -107,7 +107,7 @@ pipeline {
                     mkdir .kube
                     ls 
                     whoami
-                    chmod +r $KUBECONFIG
+                    sudo chmod +r $KUBECONFIG
                     cp $KUBECONFIG .kube/config
                     cat $KUBECONFIG > .kube/config
                     helm upgrade --install ms-fastapi-prod  helmchart --namespace prod --values helmchart/values-prod.yaml
