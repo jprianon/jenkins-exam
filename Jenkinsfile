@@ -13,7 +13,6 @@ pipeline {
                 steps {
                     script {
                     sh '''
-                    #c
                     docker rmi -f jprianon/jenkins-exam-cast-service
                     docker rmi -f jprianon/jenkins-exam-movie-service
                     docker build -t jprianon/jenkins-exam-cast-service ./Jenkins-exam/cast-service
@@ -107,6 +106,7 @@ pipeline {
                     mkdir .kube
                     ls 
                     whoami
+                    sudo mkdir -p .kube
                     sudo chmod +r $KUBECONFIG
                     sudo cp $KUBECONFIG .kube/config
                     cat $KUBECONFIG > .kube/config
