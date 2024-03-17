@@ -97,7 +97,6 @@ pipeline {
             }
             steps {
                 input message: 'Deploy to prod environment ?', ok: 'yes'
-                }
                 script {
                     sh '''
                     rm -Rf .kube
