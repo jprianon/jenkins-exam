@@ -14,7 +14,7 @@ pipeline {
                     script {
                     sh '''
                     docker rmi -f jprianon/jenkins-exam-cast-service
-                    docker rmi -f jprianon/jenkins-exam-movie-service
+                    docker rmi -f jprianon/jenkins-exam-movie-service #
                     docker build -t jprianon/jenkins-exam-cast-service ./Jenkins-exam/cast-service
                     docker build -t jprianon/jenkins-exam-movie-service ./Jenkins-exam/movie-service
                     '''
