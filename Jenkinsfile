@@ -93,7 +93,7 @@ pipeline {
 
         stage('Manual Deployment to Production') {
             when {
-                branch 'master'
+                branch 'origin/master'
             }
             steps {
                 input message: 'Deploy to prod environment ?', ok: 'yes'
