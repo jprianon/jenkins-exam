@@ -83,7 +83,7 @@ pipeline {
                     rm -Rf .kube
                     mkdir .kube
                     ls
-                    cat $KUBECONFIG > .kube/config
+                    cat $KUBECONFIG > .kube/config #
                     helm upgrade --install ms-fastapi-staging  helmchart --namespace staging --values helmchart/values-staging.yaml
                     kubectl get deploy,svc,Pod -n staging
                     '''
@@ -93,9 +93,7 @@ pipeline {
 
         stage('Manual Deployment to Production') {
             when {
-                expression {
-                    env.GIT_BRANCH == "origin/master"
-                }
+                branch 'master'
             }
             steps {
                 input message: 'Deploy to prod environment ?', ok: 'yes'
